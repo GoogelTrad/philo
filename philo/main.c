@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	int	i;
+	//t_philo philo;
 
-	i = 0;
-	
+	if (verif_arg(ac, av) == 0)
+		return (0);
 }

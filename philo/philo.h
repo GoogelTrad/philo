@@ -18,9 +18,24 @@
 # include <unistd.h>
 # include <pthread.h>
 
+# define NUMBERS "Numbers of philosophers is invalid\n"
+# define ZERO "Invalid arguments, must be bigger than 0\n"
+# define TYPE "Error, argurments are : number_of_philosophers, time_to_die, time_to_eat, time_to_sleep and number_of_times_each_philosopher_must_eat(optional)\n"
+
 typedef struct s_philo
 {
-    pthread_t   tid;
+	pthread_t	tid;
 } t_philo;
+
+//main.c
+
+
+
+//parsing.c
+int		verif_arg(int ac, char **av);
+void	put_error(char *msg);
+
+//utils.c
+int		ft_atoi(char *nptr);
 
 #endif
