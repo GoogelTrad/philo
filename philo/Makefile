@@ -1,11 +1,12 @@
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CC = gcc
 RM = rm -f
 
 SRCS =	main.c \
 		utils.c \
 		parsing.c \
+		init_philo.c \
 
 OBJC = ${SRCS:.c=.o}
 

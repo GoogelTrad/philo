@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 12:21:58 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/05 12:21:58 by cmichez          ###   ########.fr       */
+/*   Created: 2023/09/06 10:20:48 by cmichez           #+#    #+#             */
+/*   Updated: 2023/09/06 10:20:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	start_routine()
 {
-	t_data data;
+	printf("coucou\n");
+}
 
-	if (verif_arg(ac, av) == 0)
-		return (0);
-	parse_arg(&data, av);
+int	create_philo(t_data *data)
+{
+	
 }
