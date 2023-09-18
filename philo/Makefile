@@ -7,6 +7,7 @@ SRCS =	main.c \
 		utils.c \
 		parsing.c \
 		init_philo.c \
+		routine.c \
 
 OBJC = ${SRCS:.c=.o}
 

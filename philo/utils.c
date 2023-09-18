@@ -47,3 +47,22 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int				i;
+	unsigned char	*c;
+	unsigned char	*f;
+
+	i = 0;
+	c = (unsigned char *) s1;
+	f = (unsigned char *) s2;
+	while (c[i] && c[i] == f[i])
+		i++;
+	return (c[i] - f[i]);
+}
+
+void	put_msg(char *msg, size_t time, int id)
+{
+	printf("%ld %d %s\n", data->time, philo->id, msg);
+}

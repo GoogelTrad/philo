@@ -19,4 +19,6 @@ int	main(int ac, char **av)
 	if (verif_arg(ac, av) == 0)
 		return (0);
 	parse_arg(&data, av);
+	while(1)
+		is_eating(data.philo, &data);
 }

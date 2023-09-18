@@ -62,3 +62,11 @@ void	parse_arg(t_data *data, char **av)
 	}
 	data->philo[i].id = 0;
 }
+
+size_t	actual_time_ms(void)
+{
+	struct timeval	t;
+	
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
+}
