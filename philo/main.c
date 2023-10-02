@@ -14,11 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	t_data data;
+	t_philo *philo;
 
+	philo = malloc(sizeof(t_philo));
+	philo->data = malloc(sizeof(t_data));
 	if (verif_arg(ac, av) == 0)
 		return (0);
-	parse_arg(&data, av);
-	while(1)
-		is_eating(data.philo, &data);
+	philo = parse_arg(av, philo);
+	create_philo(philo->data, philo);
 }

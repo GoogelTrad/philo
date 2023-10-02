@@ -12,22 +12,61 @@
 
 #include "philo.h"
 
-int	take_fork(t_philo *philo, t_data *data)
+void	unlock_fork(t_philo *philo)
 {
-	put_msg(FORK, data->time, philo->id);
-	if ()
+	if (philo->id == philo->data->numbers)
+		pthread_mutex_unlock(&philo->fork[1]);
+	else
+		pthread_mutex_unlock(&philo->fork[philo->id + 1]);
+	pthread_mutex_unlock(&philo->fork[philo->id]);
 }
 
-void	is_eating(t_philo *philo, t_data *data)
+void	lock_fork(t_philo *philo)
 {
-	philo->eating = 1;
-	put_msg(EAT, data->time, philo->id);
-	philo->eating = 0;
+	if (philo->id == philo->data->numbers)
+		pthread_mutex_lock(&philo->fork[1]);
+	else
+		pthread_mutex_lock(&philo->fork[philo->id + 1]);
+	put_msg(FORK, philo->id, philo);
+	pthread_mutex_lock(&philo->fork[philo->id]);
+	put_msg(FORK, philo->id, philo);
 }
 
-void	status_philo(char *msg, t_philo *philo, t_data *data)
+void	is_eating(t_philo *philo)
 {
-	data->time = actual_time_ms();
-	if (ft_strcmp(msg, "EAT") == 0)
-		is_eating(philo, data);
+	lock_fork(philo);
+	put_msg(EAT, philo->id, philo);
+	philo->last_meal = get_actual_time(philo);
+	wait_action(philo->data->time_to_eat);
+	philo->nb_meals++;
+	unlock_fork(philo);
+}
+
+void	is_thinking(t_philo *philo)
+{
+	put_msg(THINK, philo->id, philo);
+}
+
+void	is_sleeping(t_philo *philo)
+{
+	put_msg(SLEEP, philo->id, philo);
+	wait_action(philo->data->time_to_sleep);
+}
+
+void	*status_philo(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	philo->last_meal = get_actual_time(philo);
+	if (philo->id % 2 == 0)
+		usleep(5000);
+	while (1)
+	{
+		is_eating(philo);
+		is_sleeping(philo);
+		is_thinking(philo);
+		//is_death(philo, data);
+	}
+	return (NULL);
 }
