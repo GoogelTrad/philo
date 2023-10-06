@@ -23,7 +23,7 @@ int	verif_arg(int ac, char **av)
 	int	i;
 
 	i = 2;
-	if (ac < 4 || ac > 5)
+	if (ac < 4 || ac > 6)
 		return (put_error(TYPE));
 	if (ft_atoi(av[1]) < 1 && ft_strlen(av[1]) > 9)
 		return (put_error(NUMBERS));
@@ -41,7 +41,6 @@ t_philo	*parse_arg(char **av, t_philo *philo)
 	int	i;
 	t_data *data;
 	pthread_mutex_t *fork;
-	pthread_mutex_t	write;
 
 	i = 0;
 	data = malloc(sizeof(t_data));
@@ -50,6 +49,7 @@ t_philo	*parse_arg(char **av, t_philo *philo)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	data->first_time = actual_time_ms();
+	data->finished = 0;
 	data->dead = 0;
 	if (av[5])
 		data->nb_must_eat = ft_atoi(av[5]);
@@ -62,12 +62,10 @@ t_philo	*parse_arg(char **av, t_philo *philo)
 		pthread_mutex_init(&fork[i], 0);
 		i++;
 	}
-	pthread_mutex_init(&write, 0);
 	i = 0;
 	while (i < data->numbers)
 	{
 		philo[i].fork = fork;
-		philo[i].write = &write;
 		philo[i].id = i + 1;
 		philo[i].nb_meals = 0;
 		philo[i].data = data;

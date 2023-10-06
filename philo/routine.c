@@ -35,6 +35,8 @@ void	lock_fork(t_philo *philo)
 void	is_eating(t_philo *philo)
 {
 	lock_fork(philo);
+	if (philo->data->finished == 1)
+		return ;
 	put_msg(EAT, philo->id, philo);
 	philo->last_meal = get_actual_time(philo);
 	wait_action(philo->data->time_to_eat);
@@ -44,11 +46,15 @@ void	is_eating(t_philo *philo)
 
 void	is_thinking(t_philo *philo)
 {
+	if (philo->data->finished == 1)
+		return ;
 	put_msg(THINK, philo->id, philo);
 }
 
 void	is_sleeping(t_philo *philo)
 {
+	if (philo->data->finished == 1)
+		return ;
 	put_msg(SLEEP, philo->id, philo);
 	wait_action(philo->data->time_to_sleep);
 }
@@ -60,13 +66,12 @@ void	*status_philo(void *arg)
 	philo = (t_philo *)arg;
 	philo->last_meal = get_actual_time(philo);
 	if (philo->id % 2 == 0)
-		usleep(5000);
-	while (1)
+		usleep(1000);
+	while (philo->data->finished == 0)
 	{
 		is_eating(philo);
 		is_sleeping(philo);
 		is_thinking(philo);
-		//is_death(philo, data);
 	}
 	return (NULL);
 }

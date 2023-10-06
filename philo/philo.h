@@ -42,7 +42,6 @@ typedef struct s_philo
 	unsigned long	last_meal;
 	int				id;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*write;
 	int				nb_meals;
 } t_philo;
 
@@ -50,6 +49,7 @@ typedef struct s_data
 {
 	unsigned long	first_time;
 	int				dead;
+	int				finished;
 	int				numbers;
 	int				nb_must_eat;
 	unsigned int	time_to_die;
@@ -58,28 +58,29 @@ typedef struct s_data
 } t_data;
 
 //main.c
-int		main(int ac, char **av);
+int				main(int ac, char **av);
 
 //parsing.c
-int		verif_arg(int ac, char **av);
-t_philo	*parse_arg(char **av, t_philo *philo);
-int		put_error(char *msg);
+int				verif_arg(int ac, char **av);
+t_philo			*parse_arg(char **av, t_philo *philo);
+int				put_error(char *msg);
 unsigned long	actual_time_ms(void);
-void	wait_action(unsigned long waiting);
+void			wait_action(unsigned long waiting);
 
 //utils.c
-int		ft_strlen(char *str);
-int		ft_atoi(char *nptr);
-int		ft_strcmp(char *s1, char *s2);
-void	put_msg(char *msg, int id, t_philo *philo);
+int				ft_strlen(char *str);
+int				ft_atoi(char *nptr);
+int				ft_strcmp(char *s1, char *s2);
+void			put_msg(char *msg, int id, t_philo *philo);
 unsigned long	get_actual_time(t_philo *philo);
 
 //init_philo.c
-void	create_philo(t_data *data, t_philo *philo);
-void	is_death(t_philo *philo, t_data *data);
+void			create_philo(t_data *data, t_philo *philo);
+void			is_death(t_philo *philo);
+void			free_all(t_philo *philo);
 
 //routine.c
-void	is_eating(t_philo *philo);
-void	*status_philo(void *arg);
+void			is_eating(t_philo *philo);
+void			*status_philo(void *arg);
 
 #endif

@@ -64,10 +64,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 void	put_msg(char *msg, int id, t_philo *philo)
 {
-	//printf("msg = %s, id = %d\n", msg, id);
-	//pthread_mutex_lock(philo->write);
 	printf("%lu %d %s\n", get_actual_time(philo), id, msg);
-	//pthread_mutex_unlock(philo->write);
 }
 
 unsigned long	get_actual_time(t_philo *philo)

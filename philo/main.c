@@ -22,4 +22,6 @@ int	main(int ac, char **av)
 		return (0);
 	philo = parse_arg(av, philo);
 	create_philo(philo->data, philo);
+	is_death(philo);
+	free_all(philo);
 }

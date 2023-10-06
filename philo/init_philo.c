@@ -26,19 +26,64 @@ void	create_philo(t_data *data, t_philo *philo)
 	}
 }
 
-void	is_death(t_philo *philo, t_data *data)
+int	finished_eat(t_philo *philo)
+{
+	if (philo->data->nb_must_eat != 0)
+	{
+		if (philo->nb_meals < philo->data->nb_must_eat)
+			return (0);
+		philo->data->finished = 1;
+		return (1);
+	}
+	return (0);
+}
+
+void	dead(t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->numbers)
+	while (i < philo->data->numbers)
 	{
-		if (actual_time_ms() - philo[i].last_meal > data->time_to_die)
+		philo[i].data->dead = 1;
+		philo[i].data->finished = 1;
+		i++;
+	}
+}
+
+void	is_death(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while(1)
+	{
+		i = 0;
+		while (i < philo->data->numbers)
 		{
-			put_msg(DEATH, philo[i].id, philo);
-			data->dead = 1;
-			break ;
+			if (get_actual_time(philo) - philo[i].last_meal > philo->data->time_to_die)
+			{
+				put_msg(DEATH, philo[i].id, philo);
+				dead(philo);
+				return ;
+			}
+			i++;
 		}
+		if (finished_eat(philo))
+			break ;
+	}
+}
+
+void	free_all(t_philo *philo)
+{
+	int	i;
+	int	max;
+
+	i = 0;
+	max = philo[0].data->numbers;
+	while (i < max)
+	{
+		pthread_mutex_destroy(philo[i].fork);
 		i++;
 	}
 }
