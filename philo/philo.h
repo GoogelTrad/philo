@@ -39,6 +39,7 @@
 typedef struct s_philo
 {
 	struct s_data	*data;
+	pthread_t		td;
 	unsigned long	last_meal;
 	int				id;
 	pthread_mutex_t	*fork;
@@ -78,6 +79,7 @@ unsigned long	get_actual_time(t_philo *philo);
 void			create_philo(t_data *data, t_philo *philo);
 void			is_death(t_philo *philo);
 void			free_all(t_philo *philo);
+int				finished_eat(t_philo *philo);
 
 //routine.c
 void			is_eating(t_philo *philo);

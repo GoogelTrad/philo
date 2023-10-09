@@ -15,13 +15,11 @@
 void	create_philo(t_data *data, t_philo *philo)
 {
 	int			i;
-	pthread_t	*thread;
 
 	i = 0;
-	thread = malloc(sizeof(pthread_t) * (data->numbers));
 	while(i < data->numbers)
 	{
-		pthread_create(&thread[i], NULL, status_philo, philo + i);
+		pthread_create(&philo[i].td, NULL, status_philo, philo + i);
 		i++;
 	}
 }
@@ -84,6 +82,7 @@ void	free_all(t_philo *philo)
 	while (i < max)
 	{
 		pthread_mutex_destroy(philo[i].fork);
+		pthread_detach(philo[i].td);
 		i++;
 	}
 }
