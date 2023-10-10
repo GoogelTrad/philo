@@ -23,7 +23,7 @@ int	verif_arg(int ac, char **av)
 	int	i;
 
 	i = 2;
-	if (ac < 4 || ac > 6)
+	if (ac <= 4 || ac > 6)
 		return (put_error(TYPE));
 	if (ft_atoi(av[1]) < 1 && ft_strlen(av[1]) > 9)
 		return (put_error(NUMBERS));
