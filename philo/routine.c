@@ -15,7 +15,7 @@
 void	unlock_fork(t_philo *philo)
 {
 	if (philo->id == philo->data->numbers)
-		pthread_mutex_unlock(&philo->fork[1]);
+		pthread_mutex_unlock(&philo->fork[0]);
 	else
 		pthread_mutex_unlock(&philo->fork[philo->id + 1]);
 	pthread_mutex_unlock(&philo->fork[philo->id]);
@@ -24,7 +24,7 @@ void	unlock_fork(t_philo *philo)
 void	lock_fork(t_philo *philo)
 {
 	if (philo->id == philo->data->numbers)
-		pthread_mutex_lock(&philo->fork[1]);
+		pthread_mutex_lock(&philo->fork[0]);
 	else
 		pthread_mutex_lock(&philo->fork[philo->id + 1]);
 	if (philo->data->dead == 1)
