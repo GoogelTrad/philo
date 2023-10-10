@@ -62,20 +62,3 @@ void	is_sleeping(t_philo *philo)
 	put_msg(SLEEP, philo->id, philo);
 	wait_action(philo->data->time_to_sleep);
 }
-
-void	*status_philo(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	philo->last_meal = get_actual_time(philo);
-	if (philo->id % 2 == 0)
-		usleep(5000);
-	while (philo->data->finished == 0)
-	{
-		is_eating(philo);
-		is_sleeping(philo);
-		is_thinking(philo);
-	}
-	return (NULL);
-}

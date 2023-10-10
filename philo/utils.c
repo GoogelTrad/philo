@@ -21,7 +21,7 @@ int	ft_atoi(char *nptr)
 	pair = 1;
 	nb = 0;
 	i = 0;
-	while(nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-')
 	{
@@ -69,5 +69,5 @@ void	put_msg(char *msg, int id, t_philo *philo)
 
 unsigned long	get_actual_time(t_philo *philo)
 {
-	return(actual_time_ms() - philo->data->first_time);
+	return (actual_time_ms() - philo->data->first_time);
 }

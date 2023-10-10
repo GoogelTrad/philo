@@ -14,10 +14,10 @@
 
 void	create_philo(t_data *data, t_philo *philo)
 {
-	int			i;
+	int	i;
 
 	i = 0;
-	while(i < data->numbers)
+	while (i < data->numbers)
 	{
 		pthread_create(&philo[i].td, NULL, status_philo, philo + i);
 		i++;
@@ -54,12 +54,13 @@ void	is_death(t_philo *philo)
 	int	i;
 
 	i = 0;
-	while(1)
+	while (1)
 	{
 		i = 0;
 		while (i < philo->data->numbers)
 		{
-			if (get_actual_time(philo) - philo[i].last_meal > philo->data->time_to_die)
+			if (get_actual_time(philo) - philo[i].last_meal
+				> philo->data->time_to_die)
 			{
 				put_msg(DEATH, philo[i].id, philo);
 				dead(philo);

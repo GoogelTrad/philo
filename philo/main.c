@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = malloc(sizeof(t_philo));
 	philo->data = malloc(sizeof(t_data));
@@ -24,4 +24,40 @@ int	main(int ac, char **av)
 	create_philo(philo->data, philo);
 	is_death(philo);
 	free_all(philo);
+}
+
+t_data	*init_data(char **av)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	data->numbers = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	data->first_time = actual_time_ms();
+	data->finished = 0;
+	data->dead = 0;
+	if (av[5])
+		data->nb_must_eat = ft_atoi(av[5]);
+	else
+		data->nb_must_eat = 0;
+	return (data);
+}
+
+void	*status_philo(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	philo->last_meal = get_actual_time(philo);
+	if (philo->id % 2 == 0)
+		usleep(5000);
+	while (philo->data->finished == 0)
+	{
+		is_eating(philo);
+		is_sleeping(philo);
+		is_thinking(philo);
+	}
+	return (NULL);
 }

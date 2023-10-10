@@ -24,7 +24,8 @@
 
 # define NUMBERS "Numbers of philosophers is invalid\n"
 # define ZERO "Invalid arguments, must be in int array and bigger than 0\n"
-# define TYPE "Error, arguments must be : number_of_philosophers, time_to_die, time_to_eat, time_to_sleep and number_of_times_each_philosopher_must_eat(optional)\n"
+# define TYPE "Error, arguments must be : number_of_philosophers, time_to_die, time_to_eat,\
+	time_to_sleep and number_of_times_each_philosopher_must_eat(optional)\n"
 
 //Philo message
 
@@ -44,7 +45,7 @@ typedef struct s_philo
 	int				id;
 	pthread_mutex_t	*fork;
 	int				nb_meals;
-} t_philo;
+}	t_philo;
 
 typedef struct s_data
 {
@@ -56,10 +57,12 @@ typedef struct s_data
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-} t_data;
+}	t_data;
 
 //main.c
 int				main(int ac, char **av);
+t_data			*init_data(char **av);
+void			*status_philo(void *arg);
 
 //parsing.c
 int				verif_arg(int ac, char **av);
@@ -83,6 +86,9 @@ int				finished_eat(t_philo *philo);
 
 //routine.c
 void			is_eating(t_philo *philo);
-void			*status_philo(void *arg);
+void			is_sleeping(t_philo *philo);
+void			is_thinking(t_philo *philo);
+void			lock_fork(t_philo *philo);
+void			unlock_fork(t_philo *philo);
 
 #endif
