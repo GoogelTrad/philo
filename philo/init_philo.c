@@ -59,14 +59,19 @@ void	is_death(t_philo *philo)
 		i = 0;
 		while (i < philo->data->numbers)
 		{
-			if (get_actual_time(philo) - philo[i].last_meal
-				> philo->data->time_to_die)
+			if (philo->eating == 0)
 			{
-				put_msg(DEATH, philo[i].id, philo);
-				dead(philo);
-				return ;
+				if (get_actual_time(philo) - philo[i].last_meal
+					> philo->data->time_to_die)
+				{
+					usleep(20);
+					put_msg(DEATH, philo[i].id, philo);
+					dead(philo);
+					return ;
+				}
 			}
 			i++;
+			usleep(500);
 		}
 		if (finished_eat(philo))
 			break ;
@@ -76,14 +81,13 @@ void	is_death(t_philo *philo)
 void	free_all(t_philo *philo)
 {
 	int	i;
-	int	max;
 
 	i = 0;
-	max = philo[0].data->numbers;
-	while (i < max)
+	while (i < philo->data->numbers)
+		pthread_detach(philo[i++].td);
+	while (i < philo->data->numbers)
 	{
-		pthread_mutex_destroy(philo[i].fork);
-		pthread_detach(philo[i].td);
+		pthread_mutex_destroy(&philo->fork[i]);
 		i++;
 	}
 }

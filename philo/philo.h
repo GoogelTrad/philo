@@ -43,6 +43,7 @@ typedef struct s_philo
 	pthread_t		td;
 	unsigned long	last_meal;
 	int				id;
+	int				eating;
 	pthread_mutex_t	*fork;
 	int				nb_meals;
 }	t_philo;

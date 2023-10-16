@@ -55,6 +55,7 @@ t_philo	*parse_arg(char **av, t_philo *philo)
 	while (i < data->numbers)
 	{
 		philo[i].fork = fork;
+		philo[i].eating = 0;
 		philo[i].id = i + 1;
 		philo[i].nb_meals = 0;
 		philo[i].data = data;
