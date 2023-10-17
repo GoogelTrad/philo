@@ -46,7 +46,7 @@ t_philo	*parse_arg(char **av, t_philo *philo)
 	data = init_data(av);
 	philo = malloc(sizeof(t_philo) * (data->numbers));
 	fork = malloc(sizeof(pthread_mutex_t) * data->numbers);
-	while (i <= data->numbers)
+	while (i < data->numbers)
 	{
 		pthread_mutex_init(&fork[i], 0);
 		i++;
