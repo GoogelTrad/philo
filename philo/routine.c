@@ -14,32 +14,26 @@
 
 void	unlock_fork(t_philo *philo)
 {
-	if (philo->data->numbers > 1)
-	{
-		if (philo->id == philo->data->numbers)
-			pthread_mutex_unlock(&philo->fork[0]);
-		else
-			pthread_mutex_unlock(&philo->fork[philo->id]);
-	}
+	if (philo->id == philo->data->numbers)
+		pthread_mutex_unlock(&philo->fork[0]);
+	else
+		pthread_mutex_unlock(&philo->fork[philo->id]);
 	pthread_mutex_unlock(&philo->fork[philo->id - 1]);
 }
 
 void	lock_fork(t_philo *philo)
 {
+	if (philo->id == philo->data->numbers)
+		pthread_mutex_lock(&philo->fork[0]);
+	else
+		pthread_mutex_lock(&philo->fork[philo->id]);
+	if (philo->data->dead == 1)
+		return ;
+	put_msg(FORK, philo->id, philo);
 	pthread_mutex_lock(&philo->fork[philo->id - 1]);
 	if (philo->data->dead == 1)
 		return ;
 	put_msg(FORK, philo->id, philo);
-	if (philo->data->numbers > 1)
-	{
-		if (philo->id == philo->data->numbers)
-			pthread_mutex_lock(&philo->fork[0]);
-		else
-			pthread_mutex_lock(&philo->fork[philo->id]);
-		if (philo->data->dead == 1)
-			return ;
-		put_msg(FORK, philo->id, philo);
-	}
 }
 
 void	is_eating(t_philo *philo)

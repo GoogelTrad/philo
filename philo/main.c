@@ -52,7 +52,7 @@ void	*status_philo(void *arg)
 	philo = (t_philo *)arg;
 	philo->last_meal = get_actual_time(philo);
 	if (philo->id % 2 == 1)
-		usleep(5000);
+		wait_action(20);
 	while (philo->data->finished == 0)
 	{
 		is_eating(philo);
