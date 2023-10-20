@@ -27,11 +27,11 @@ void	lock_fork(t_philo *philo)
 		pthread_mutex_lock(&philo->fork[0]);
 	else
 		pthread_mutex_lock(&philo->fork[philo->id]);
-	if (philo->data->dead == 1)
+	if (philo->data->dead == 1 || philo->data->finished == 1)
 		return ;
 	put_msg(FORK, philo->id, philo);
 	pthread_mutex_lock(&philo->fork[philo->id - 1]);
-	if (philo->data->dead == 1)
+	if (philo->data->dead == 1 || philo->data->finished == 1)
 		return ;
 	put_msg(FORK, philo->id, philo);
 }
