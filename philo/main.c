@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	philo = parse_arg(av);
 	create_philo(philo->data, philo);
 	is_death(philo);
-	free_all(philo);
+	free(philo->fork);
 	free(philo->data);
 	free(philo);
 }

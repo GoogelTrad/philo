@@ -20,6 +20,7 @@ void	create_philo(t_data *data, t_philo *philo)
 	while (i < data->numbers)
 	{
 		pthread_create(&philo[i].td, NULL, status_philo, philo + i);
+		pthread_detach(philo[i].td);
 		i++;
 	}
 }
@@ -78,12 +79,3 @@ void	is_death(t_philo *philo)
 	}
 }
 
-void	free_all(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < philo->data->numbers)
-		pthread_detach(philo[i++].td);
-	free(philo->fork);
-}
