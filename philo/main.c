@@ -16,14 +16,14 @@ int	main(int ac, char **av)
 {
 	t_philo	*philo;
 
-	philo = malloc(sizeof(t_philo));
-	philo->data = malloc(sizeof(t_data));
 	if (verif_arg(ac, av) == 0)
 		return (0);
-	philo = parse_arg(av, philo);
+	philo = parse_arg(av);
 	create_philo(philo->data, philo);
 	is_death(philo);
 	free_all(philo);
+	free(philo->data);
+	free(philo);
 }
 
 t_data	*init_data(char **av)

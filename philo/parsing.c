@@ -36,10 +36,11 @@ int	verif_arg(int ac, char **av)
 	return (1);
 }
 
-t_philo	*parse_arg(char **av, t_philo *philo)
+t_philo	*parse_arg(char **av)
 {
 	int				i;
 	t_data			*data;
+	t_philo			*philo;
 	pthread_mutex_t	*fork;
 
 	i = 0;

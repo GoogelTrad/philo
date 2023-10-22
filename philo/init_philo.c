@@ -85,9 +85,5 @@ void	free_all(t_philo *philo)
 	i = 0;
 	while (i < philo->data->numbers)
 		pthread_detach(philo[i++].td);
-	while (i < philo->data->numbers)
-	{
-		pthread_mutex_destroy(&philo->fork[i]);
-		i++;
-	}
+	free(philo->fork);
 }

@@ -35,8 +35,6 @@
 # define THINK "is thinking"
 # define DEATH "died"
 
-// -fsanitize=thread
-
 typedef struct s_philo
 {
 	struct s_data	*data;
@@ -67,7 +65,7 @@ void			*status_philo(void *arg);
 
 //parsing.c
 int				verif_arg(int ac, char **av);
-t_philo			*parse_arg(char **av, t_philo *philo);
+t_philo			*parse_arg(char **av);
 int				put_error(char *msg);
 unsigned long	actual_time_ms(void);
 void			wait_action(unsigned long waiting);
@@ -85,6 +83,7 @@ void			is_death(t_philo *philo);
 void			free_all(t_philo *philo);
 int				finished_eat(t_philo *philo);
 
+// -fsanitize=thread
 //routine.c
 void			is_eating(t_philo *philo);
 void			is_sleeping(t_philo *philo);
